@@ -1,35 +1,37 @@
 import {Alert, Button, StatusBar, TouchableOpacity} from 'react-native';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View, TextInput, Image} from 'react-native';
 
 export default function App() {
-
   const [ip, setIp] = useState('');
 
-  const verificarIP = () => {
-    Alert.alert(
-      'Atenção',
-      'Você tem certeza que deseja excluir este item?',
-      // [
-      //     {
-      //     text: 'Não',
-      //     onPress: () => console.log('Cancel Pressed'),
-      //     style: 'cancel'
-      //     },
-      //     { text: 'Sim', onPress: () => console.log('deleted') }
-      // ],
-      // { cancelable: false }
-      );
-  }
+  const Swal = require('sweetalert2');
 
+  function handleVerify() {
+    const data = ip;
+
+    console.log(data);
+
+    Alert.alert('Verificando IP', data);
+  }
   return (
     <View style={styles.container}>
-      <StatusBar hidden/>
-      <Image style={styles.image} source={require('./assets/img/server-bro.png')}/>
+      <StatusBar hidden />
+      <Image
+        style={styles.image}
+        source={require('./assets/img/server-bro.png')}
+      />
       <Text style={styles.textPrinc}>Endereço IP</Text>
-      <TextInput placeholder='Endereço IP' style={styles.input}/>
-      <TouchableOpacity style={styles.btnVerificar} onPress={() => verificarIP()}>
-        <Text style={{color: '#FFF', fontFamily: 'Poppins-Medium',}}>Verificar</Text>
+      <TextInput
+        value={ip}
+        placeholder="Endereço IP"
+        style={styles.input}
+        onChangeText={setIp}
+      />
+      <TouchableOpacity style={styles.btnVerificar} onPress={handleVerify}>
+        <Text style={{color: '#FFF', fontFamily: 'Poppins-Medium'}} id="ipData">
+          Verificar
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -45,8 +47,8 @@ const styles = StyleSheet.create({
   textPrinc: {
     fontSize: 20,
     fontFamily: 'Poppins-Bold',
-    color: '#004b76'
-  }, 
+    color: '#004b76',
+  },
   input: {
     height: 45,
     width: 250,
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderRadius: 18,
     backgroundColor: '#c9e1ef',
-    fontFamily: 'Poppins-Regular'
+    fontFamily: 'Poppins-Regular',
   },
   image: {
     width: 200,
@@ -75,6 +77,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 10
-  }
+    paddingVertical: 10,
+  },
 });
